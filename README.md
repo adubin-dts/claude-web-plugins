@@ -1,6 +1,6 @@
-# Claude Code Web + Superpowers Test Repository
+# Claude Web Plugins
 
-This repository enables the [Superpowers plugin](https://github.com/obra/superpowers) functionality to work with Claude Code on the web (claude.ai/code).
+This repository enables plugins and skills to work with Claude Code on the web (claude.ai/code).
 
 ## Background
 
@@ -10,47 +10,57 @@ Claude Code CLI supports plugins via `/plugin install`, but Claude Code Web runs
 - Discover and use Skills from `.claude/skills/` directories
 - Read and apply `CLAUDE.md` instructions
 
-This repository embeds the Superpowers plugin directly in the `.claude/` directory structure.
+This repository embeds plugin contents directly in the `.claude/` directory structure, making them available in Claude Code Web.
 
 ## What's Included
 
-### Skills (14 total)
+### Plugins
+
+**From [Superpowers](https://github.com/obra/superpowers)** (obra):
+- Skills for brainstorming, planning, TDD, debugging, code review workflows
+- Commands: `/brainstorm`, `/write-plan`, `/execute-plan`
+- Agents: code-reviewer
+
+**From [Anthropic Plugins](https://github.com/anthropics/claude-code/tree/main/.plugins)**:
+- **feature-dev** - Feature development workflow
+- **hookify** - Hook management system
+- **security-guidance** - Security reminders on file edits
+- **code-review** - Code review capabilities
+- **frontend-design** - Frontend design patterns
+- **pr-review-toolkit** - PR review tools
+- **ralph-wiggum** - Iterative development loops
+
+### Skills (16 total)
 Located in `.claude/skills/`:
-- `using-superpowers` - Core skill that teaches Claude how to use other skills
-- `brainstorming` - Interactive design refinement before coding
-- `writing-plans` - Create detailed implementation plans
-- `executing-plans` - Execute plans with review checkpoints
+- `using-superpowers` - Core skill for using other skills
+- `brainstorming` - Interactive design refinement
+- `writing-plans` - Create implementation plans
+- `executing-plans` - Execute plans with checkpoints
 - `test-driven-development` - TDD workflow
 - `systematic-debugging` - Methodical bug diagnosis
 - `using-git-worktrees` - Create isolated workspaces
-- `dispatching-parallel-agents` - Run multiple agents concurrently
+- `dispatching-parallel-agents` - Run multiple agents
 - `subagent-driven-development` - Implementation with subagents
 - `requesting-code-review` - Request code reviews
-- `receiving-code-review` - Handle code review feedback
-- `finishing-a-development-branch` - Complete development work
-- `verification-before-completion` - Verify before claiming completion
+- `receiving-code-review` - Handle review feedback
+- `finishing-a-development-branch` - Complete dev work
+- `verification-before-completion` - Verify before completion
 - `writing-skills` - Create new skills
+- `frontend-design` - Frontend design patterns
+- `writing-rules` - Writing best practices
 
-### Commands
-Located in `.claude/commands/`:
-- `/brainstorm` - Start brainstorming session
-- `/write-plan` - Create implementation plan
-- `/execute-plan` - Execute plan in batches
+### Commands (14 total)
+Located in `.claude/commands/`
 
-### Agents
-Located in `.claude/agents/`:
-- `code-reviewer` - Review completed work against plans
-
-### Hooks
-Located in `.claude/hooks/`:
-- `session-start.sh` - Injects Superpowers context at session start
+### Agents (11 total)
+Located in `.claude/agents/`
 
 ## How It Works
 
 1. When you start a Claude Code Web session with this repo, it clones to Anthropic's VM
-2. The SessionStart hook runs and injects the `using-superpowers` skill content
-3. Claude sees the skill descriptions and follows them automatically based on task context
-4. When you ask Claude to "build something," it follows the brainstorm->plan->implement workflow
+2. The SessionStart hook runs and injects skill context
+3. Claude sees the skill descriptions and follows them based on task context
+4. Hooks provide additional capabilities (security reminders, etc.)
 
 ## Usage
 
@@ -60,38 +70,35 @@ Located in `.claude/hooks/`:
 3. Connect your GitHub and select this repository
 4. Start a session
 
-### Option 2: Add Superpowers to an Existing Repository
-Copy the `.claude/` directory from this repository to your project.
+### Option 2: Add to an Existing Repository
+
+```bash
+# Clone this repo
+git clone https://github.com/adubin-dts/claude-web-plugins.git
+
+# Install to your target repo
+./claude-web-plugins/install.sh /path/to/your/repo
+
+# Commit the .claude/ directory
+cd /path/to/your/repo
+git add .claude/
+git commit -m "Add Claude Web plugins"
+```
 
 ## Verification
 
-To verify Superpowers is working:
+To verify plugins are working:
 
-1. **Check initialization**: At session start, you should see Claude mention it has Superpowers
-
-2. **Test workflow trigger**: Ask Claude to "build a simple calculator." Claude should:
-   - NOT immediately start coding
-   - Start asking clarifying questions (brainstorming phase)
-   - Follow the brainstorm -> plan -> implement workflow
-
+1. **Check initialization**: At session start, Claude should acknowledge having skills
+2. **Test workflow**: Ask Claude to "build a simple calculator" - it should brainstorm first, not code immediately
 3. **Check skills**: Ask "What skills do you have available?"
-
 4. **Test commands**: Try `/brainstorm "build a todo app"`
-
-## Expected Behavior
-
-When Superpowers is working correctly, Claude will:
-
-- **Before any creative work**: Use the brainstorming skill to explore requirements
-- **Before implementation**: Create a detailed plan
-- **During implementation**: Follow TDD practices
-- **When debugging**: Use systematic debugging approach
-- **Before claiming completion**: Verify with tests and evidence
 
 ## Credits
 
-This repository contains the [Superpowers plugin](https://github.com/obra/superpowers) by Jesse Vincent, restructured for Claude Code Web compatibility.
+- [Superpowers plugin](https://github.com/obra/superpowers) by Jesse Vincent
+- [Anthropic plugins](https://github.com/anthropics/claude-code/tree/main/.plugins) by Anthropic
 
 ## License
 
-MIT License (same as original Superpowers plugin)
+MIT License

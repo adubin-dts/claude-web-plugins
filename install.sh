@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install Claude Code Web superpowers to a target repository
+# Install Claude Web Plugins to a target repository
 #
 # Usage:
 #   ./install.sh /path/to/target/repo

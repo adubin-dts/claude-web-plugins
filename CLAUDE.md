@@ -1,8 +1,8 @@
-# CLAUDE.md - Superpowers-Enabled Repository
+# CLAUDE.md - Claude Web Plugins
 
-This repository has Superpowers skills configured. Follow the Superpowers workflow for all tasks.
+This repository has plugins and skills configured for Claude Code Web.
 
-## The Superpowers Workflow
+## Workflow
 
 Before writing ANY code:
 1. **Brainstorm first** - Use the brainstorming skill to explore requirements and design
@@ -11,19 +11,22 @@ Before writing ANY code:
 
 ## Key Skills
 
-The following skills are available in `.claude/skills/`:
+Available in `.claude/skills/`:
 
 - **brainstorming**: MUST use before any creative work (features, components, modifications)
 - **writing-plans**: Create detailed implementation plans with bite-sized tasks
 - **test-driven-development**: Red-green-refactor cycle
 - **systematic-debugging**: Methodical bug diagnosis (gather evidence before theorizing)
 - **verification-before-completion**: Verify with evidence before claiming success
+- **frontend-design**: Frontend design patterns and best practices
 
 ## Slash Commands
 
 - `/brainstorm` - Start interactive design session
 - `/write-plan` - Create implementation plan
 - `/execute-plan` - Execute plan with checkpoints
+- `/code-review` - Request code review
+- `/feature-dev` - Feature development workflow
 
 ## Rules
 
