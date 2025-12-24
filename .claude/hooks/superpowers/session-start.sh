@@ -3,9 +3,9 @@
 
 set -euo pipefail
 
-# Determine plugin root directory
+# Determine .claude root directory (two levels up from hooks/superpowers/)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
-PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+CLAUDE_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 # Check if legacy skills directory exists and build warning
 warning_message=""
@@ -15,7 +15,7 @@ if [ -d "$legacy_skills_dir" ]; then
 fi
 
 # Read using-superpowers content
-using_superpowers_content=$(cat "${PLUGIN_ROOT}/skills/using-superpowers/SKILL.md" 2>&1 || echo "Error reading using-superpowers skill")
+using_superpowers_content=$(cat "${CLAUDE_ROOT}/skills/superpowers/using-superpowers/SKILL.md" 2>&1 || echo "Error reading using-superpowers skill")
 
 # Escape outputs for JSON using pure bash
 escape_for_json() {
